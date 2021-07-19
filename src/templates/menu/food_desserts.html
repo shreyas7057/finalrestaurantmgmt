@@ -1,0 +1,103 @@
+{% load static %}
+{% load mathfilters %}
+{% include "partials/_landing_top.html" %}
+
+
+<body>
+
+	<div class="col-md-12">
+		<div class="row">
+			<div class="col-md-6">
+				<h1 class="text-left"><a href="/" style="text-decoration: none; color: black;">Restaurant Mgmt</a></h1>
+			</div>
+			<div class="col-md-6">
+				
+			</div>
+		</div>
+	</div>
+	<!-- menu -->
+	<div class="menu">
+		<div class="container">
+			<div class="row">
+				<div class="menu-heading col-md-6">
+					<h2>Dessert Menu</h2>
+				</div>
+
+			</div>
+            {% if foods %}
+			<div class="menu-top-grids infinite-container">
+				{% for food in foods %}
+				{% if forloop.counter0|mod:4 == 1 %}
+				<div class="w3ls-menu-grids">
+					{% endif %}
+					<div class="col-md-3 menu-grid infinite-item">
+						<div class="agile-menu-grid">
+							<a href="{% url 'food_details' food.id %}">
+								<img src="/media/{{food.image}}" alt="" height="200px" width="200px" />
+								<div class="agileits-caption">
+									<h4>{{food.name}}</h4>
+									<p><i class="fa fa-inr"></i> {{food.sale_price}}</p>
+								</div>
+							</a>
+						</div>
+					</div>
+					<!--{% if forloop.counter0|mod:4 == 0 %}-->
+					<!--<div style="height:100px;"></div>-->
+					<!--{% endif %}-->
+
+					{% if forloop.counter0|mod:4 == 1 %}
+				</div>
+				{% endif %}
+				{% endfor %}
+
+				<div class="clearfix"> </div>
+			</div>
+
+
+
+			<!-- pagination start -->
+
+			<div class="d-flex d-none position-fixed" style="top:35vh;left:46vw">
+				<button class="btn btn-dark loading">
+					<span class="spinner-border spinner-border-sm"></span>
+					Please wait...
+				</button>
+			</div>
+
+			<!--Pagination-->
+			<div class="container p-4">
+				<div class="pagination justify-content-center">
+					<span class="step-links">
+					  {% if foods.has_previous %}
+						  <a href="?page=1">&laquo; first</a>
+						  <a href="?page={{ foods.previous_page_number }}">previous</a>
+					  {% endif %}
+		
+						<span class="current">
+							Page {{ foods.number }} of {{ foods.paginator.num_pages }}
+						</span>
+		
+					  {% if foods.has_next %}
+						  <a class="infinite-more-link" href="?page={{ foods.next_page_number }}">next</a>
+						  <a href="?page={{ foods.paginator.num_pages }}">last &raquo;</a>
+					  {% endif %}
+					</span>
+					</div>
+				</div>
+			  <!--end of Pagination-->
+			<!-- end pagination -->
+
+			{% include 'partials/_infinite_scroll.html' %}
+
+
+            {% else %}
+            <h1>Currently no menu available from this category.</h1>
+            {% endif %}
+		</div>
+	</div>
+
+	
+
+
+	<!-- //menu -->
+	{% include "partials/footer.html" %}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Customers</title>
+</head>
+<body>
+  
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Sr.No.</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Contact</th>
+                    <th>Area</th>
+                    <th>Active</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customers %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ customer.customer.username }}</td>
+                    <td>{{ customer.customer.email }}</td>
+                    <td>{{ customer.address }}</td>
+                    <td>{{ customer.contact }}</td>
+                    <td>{{ customer.area }}</td>
+                    <td>{{ customer.customer.is_active }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

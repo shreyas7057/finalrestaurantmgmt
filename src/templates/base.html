@@ -1,0 +1,22 @@
+{% load static %}
+{% include 'partials/_landing_top.html' %}
+
+
+
+<body>
+	<script src="{% static 'js/jquery.vide.min.js' %}"></script>
+	<div data-vide-bg="{% static 'video/bg.jpg' %}">
+		<!-- banner -->
+		{% include "partials/banner.html" %}
+		<!-- //banner -->
+	</div>
+{% block content %}
+
+{% endblock content %}
+
+
+{% include 'partials/footer.html' %}
+
+{% include 'partials/scripts.html' %}
+
+</body>

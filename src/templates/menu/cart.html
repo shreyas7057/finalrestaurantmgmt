@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load mathfilters %}
+{% load static %}
+{% block content %}
+
+<div style="height:100px;"></div>
+
+<div class="container text-center">
+
+    <div class="col-md-5 col-sm-12">
+        <div class="bigcart"></div>
+        <h1>Your shopping cart</h1>,<br>
+        <a href="" class="btn btn-info">Change Address</a>
+        <a href="{% url 'myorders' %}" class="btn btn-info">My Orders</a>
+        
+    </div>
+    {% if items %}
+    <div class="col-md-7 col-sm-12 text-left">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Sr.No</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Item</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.food.name }}</td>
+                    <td>₹ {{ item.food.sale_price|mul:item.quantity }}</td>
+                    <td><a href="{% url 'delete_from_cart' item.id %}">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th id="total" colspan="3">Total :</th>
+                    <td>₹ {{total}}</td>
+                </tr>
+            </tfoot>
+        </table>
+        <span class="order"> <a class="text-center btn btn-primary" href="{% url 'placeOrder' %}">Confirm Order</a></span>
+        <span class="order"> <a class="text-center btn btn-warning" href="{% url 'menu' %}">Continue Shopping</a></span>
+
+    </div>
+    {% else %}
+    <h1>Your Cart is Empty</h1>
+    <p>Click <a href="{% url 'menu' %}" class="btn btn-primary">here</a> to order menu items.</p>
+    {% endif %}
+
+</div>
+
+<!-- The popover content -->
+
+<div id="popover" style="display: none">
+    <a><span class="glyphicon glyphicon-pencil"></span></a>
+    <a id="remove"><span class="glyphicon glyphicon-remove"></span></a>
+</div>
+
+<!-- JavaScript includes -->
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'assets/js/customjs.js' %}"></script>
+{% endblock content %}
+
+<ul>
+    <li class="row list-inline columnCaptions">
+        <span>Quant</span>
+        <span>Item</span>
+        <span>Price</span>
+        <span>Delete</span>
+    </li>
+    <!-- item {% for item in items %} -->
+    <li class="row">
+        <span class="quantity">{{item.quantity}}</span>
+        <span class="itemName">{{item.food.name}}</span>
+        <span class="popbtn"><a class="arrow" id="{{item.id}}"></a></span>
+        <span class="price">₹ {{ item.food.sale_price|mul:item.quantity }}</span>
+    </li>
+    {% endfor %}
+    <li class="row totals">
+        <span class="itemName">Total:</span>
+        <span class="price">₹ {{total}}</span>
+        <span class="order"> <a class="text-center" href="">ORDER</a></span>
+        <span class="order"> <a class="text-center" href="{% url 'menu' %}">Continue Shopping</a></span>
+    </li>
+</ul>

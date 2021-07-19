@@ -1,0 +1,79 @@
+
+
+
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Order Pdf</title>
+
+        <style type="text/css">
+            body {
+                font-size: 14px;
+            }
+
+            tr.head td,
+            tr.footer td {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                font-size: 18px;
+                font-weight: bold;
+                background-color: #f9f9f9;
+            }
+
+            tr.footer td {
+                font-size: 14px;
+            }
+
+            tr.item td {
+                padding-top: 3px;
+                padding-bottom: 3px;
+                font-size: 14px;;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <h1>Invoice #{{ order.order.id }}</h1>
+
+            <h2>User Details</h2>
+
+            <p>
+                Username: {{ user.username }}<br>
+                Email ID: {{ user.email }}<br>
+                Mobile No: {{ customer.contact }}<br>
+                Address: {{ customer.address }} <br>
+                Area: {{ customer.area }}<br>
+            </p>
+
+            <h2>Food Menu</h2>
+
+            <table cellpadding="0" cellspacing="0">
+                <tr class="head">
+                    <td>Sr.No</td>
+                    <td>Name</td>
+                    <td>Price</td>
+                    <td>Quantity</td>
+                    <td>Total Amount</td>
+                </tr>
+                {% for order in orders %}
+                <tr class="item">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ order.food.name }}</td>
+                    <td>{{ order.food.sale_price|floatformat:2 }}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>Rs. {{ order.order.total_amount|floatformat:2 }}</td>
+                    
+                </tr>
+                {% endfor %}
+
+            </table>
+
+            <h2>Restaurant Mgmt</h2>
+
+            <p>Thanks for ordering from us!</p>
+        </div>
+    </body>
+</html>

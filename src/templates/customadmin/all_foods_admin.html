@@ -1,0 +1,20 @@
+{% extends 'admin_base.html' %}
+
+{% block admin_content %}
+
+
+<div class="row">
+    {% for food in all_foods %}
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-dark text-white mb-4">
+            <div class="card-body" >Menu Name: {{ food.name }}</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="{% url 'single_food_admin' food.id %}">View Details</a>
+                <a class="small text-white stretched-link" href="{% url 'edit_single_food_admin' food.pk %}">Edit</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock admin_content %}

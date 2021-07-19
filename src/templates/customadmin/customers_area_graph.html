@@ -1,0 +1,40 @@
+{% extends 'admin_base.html' %}
+
+
+{% block admin_content %}
+
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const labels = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+    ];
+    const data = {
+        labels: [{% for c in customers %}'{{ c.area|title }}',{% endfor %}],
+        datasets: [{
+            label: 'Customers in particular area',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [{% for c in customers %}{{ c.dcount }}, {% endfor %}],
+        }]
+    };
+    const config = {
+        type: 'bar',
+        data,
+        options: {}
+    };
+    var myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+</script>
+
+{% endblock admin_content %}

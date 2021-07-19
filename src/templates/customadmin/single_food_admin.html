@@ -1,0 +1,26 @@
+{% extends 'admin_base.html' %}
+
+{% block admin_content %}
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-4"></div>
+
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{ food.image.url }}" alt="{{ food.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">Name: {{ food.name }}</h5>
+                    <p class="card-text">Course: {{ food.course }}</p>
+                    <p class="card-text">Sale Price: {{ food.sale_price }}</p>
+                    <p class="card-text">Base Price: {{ food.base_price }}</p>
+                    <p class="card-text">Status: {{ food.status }}</p>
+                    <p class="card-text">Description: {{ food.content_description }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4"></div>
+    </div>
+</div>
+{% endblock admin_content %}

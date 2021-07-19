@@ -1,0 +1,19 @@
+{% load static %}
+<!-- scripts for infinte scroll -->
+			<script src="{% static 'js/scroll/jquery.waypoints.min.js' %}"></script>
+    <script src="/static/js/scroll/infinite.min.js"></script>
+    <script>
+        var infinite = new Waypoint.Infinite({
+            element: $('.infinite-container')[0],
+
+            offset: 'bottom-in-view',
+
+            onBeforePageLoad: function () {
+                $('.loading').show();
+            },
+            onAfterPageLoad: function () {
+                $('.loading').hide();
+            }
+
+        });
+    </script>
