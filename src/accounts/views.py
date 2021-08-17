@@ -6,7 +6,7 @@ from django.views import View
 from django.http import JsonResponse, request
 import json
 from validate_email import validate_email
-from .models import Customer, Staff
+from .models import Comment, Customer, Staff
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -76,7 +76,7 @@ class PasswordValidate(View):
         if len(password)<8:
             return JsonResponse({'password_error':'password to short'},status=409)
 
-        return JsonResponse({'password_error':True})
+        return JsonResponse({'password_error':True},status=400)
 
 
 def signup(request):
@@ -276,3 +276,20 @@ def password_reset_request(request):
 #         address = request.POST.get('address')
 
 #     return render(request,'auth/update_address.html')
+
+
+# def add_comment(request):
+#     if request.user.is_authenticated:
+#         if request.method == "POST":
+#             content = request.POST.get('comment')
+
+#             comment_user = Comment.objects.create(
+#                 user = request.user,
+#                 content = content
+#             )
+#             comment_user.save()
+#             messages.success(request,'Comment Added Successfully')
+#             return redirect('/')
+
+
+#     return render(request,'auth/add_comment.html')

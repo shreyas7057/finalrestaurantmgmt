@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Restaurant Mgmt | Signup</title>
+    <title>City Inn | Signup</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -31,11 +31,12 @@
 
 <body>
 
-    <h1 class="text-center pb-4"><a href="/" style="text-decoration: none; color: black;">Restaurant Mgmt</a></h1>
+    <h1 class="text-center pb-4"><a href="/" style="text-decoration: none; color: black;">City Inn</a></h1>
 
     <div class="container">
         <div class="row">
-            <div class="col-md-4"></div>
+            <div class="col-md-4">
+            </div>
             <div class="col-md-4 border border-dark  text-center">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
@@ -79,6 +80,8 @@
                                         required>
                                     <small style="text-align: right;" class="float-right showPasswordToggle">SHOW</small>
                                 </div>
+                                <div class="invalid_feedback invalid-feedback" style="display: none;"></div>
+                                <p class="text-sm text-success passwordsuccessOutput"></p>
 
 
                                 <!-- Change this to a button or input when using this as a form -->

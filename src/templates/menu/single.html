@@ -36,8 +36,14 @@
                 </ul>
             </div>
             <div class="categories">
-                <h3>Order history</h3>
-                <a href="{% url 'myorders' %}">View All Orders</a>
+                <h3>Add Review For Us</h3>
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <input type="text" name="content" placeholder="Add review" class="form-control"><br>
+                    <input type="submit" value="Save Review" class="btn btn-info">
+                </form>
                 
             </div>
         </div>

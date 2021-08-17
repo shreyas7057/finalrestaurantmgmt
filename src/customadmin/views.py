@@ -18,7 +18,7 @@ from django.views.generic import CreateView,UpdateView
 from django.contrib import messages
 from django.contrib.auth import authenticate,logout
 
-from menu.models import Food,Order
+from menu.models import Food,Order,OrderContent
 from accounts.models import Customer
 
 
@@ -71,7 +71,7 @@ def all_customers_export_as_pdf(request,*args,**kwargs):
     # response['Content-Disposition'] = 'attachment; filename="report.pdf"'
 
     # if you want to display or view the html page in form of pdf
-    response['Content-Disposition'] = 'filename="All Customer.pdf"'
+    response['Content-Disposition'] = 'attachment; filename="All Customer.pdf"'
     
     
     # find the template and render it.
@@ -130,3 +130,38 @@ def logout_admin(request):
     logout(request)
     messages.success(request,'User successfully logged out.')
     return redirect('login')
+
+
+def all_orders_admin(request):
+    # order = Order.objects.all()
+    # order_content = OrderContent.objects.filter(order=order)
+    
+    # context = {
+    #     'order_content':order_content,
+    #     'order':order
+    # }
+    return render(request,'customadmin/all_orders_admin.html')
+
+
+# this will graphically show how many menus are present in particular course
+def course_menu_count(request):
+    courses = Food.objects.values('course').annotate(dcount=Count('course'))
+    context = {
+        'courses':courses
+    }
+    return render(request,'customadmin/course_menu_count.html',context)
+
+
+def all_menu_export_as_csv(request):
+    food = Food.objects.all()
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="All Menu.csv"'
+
+    # adding values or fields
+    writer = csv.writer(response)
+    writer.writerow(['Username','Email','Address','Contact','Area','Is Active'])
+    for i in food:
+        writer.writerow([i.food.username,i.food.email,i.address,i.contact,i.area,i.customer.is_active])
+
+    return response

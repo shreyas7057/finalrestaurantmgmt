@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'accounts',
     'customadmin',
     'menu',
-    'sociallinks',
 ]
 
 GRAPH_MODELS = {
@@ -167,5 +166,5 @@ MESSAGE_TAGS = {
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = '@gmail.com'
+EMAIL_HOST_USER = 'shreyas7057@gmail.com'
 EMAIL_HOST_PASSWORD = ''

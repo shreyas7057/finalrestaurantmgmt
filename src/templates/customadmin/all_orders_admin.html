@@ -1,0 +1,30 @@
+{% extends 'admin_base.html' %}
+
+{% block admin_content %}
+
+<div class="container">
+    <div class="col-md-9">
+        <table class="table">
+            <thead>
+                <th>Sr.No</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Order</th>
+                <th>Order Time</th>
+                <th>Order details</th>
+            </thead>
+            <tbody>
+                {% for order in order_content %}
+                <tr>
+                    <th>{{ forloop.counter }}</th>
+                    <td>{{ order.order.order_timestamp }}</td>
+                    <td>{{ order.food.name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+{% endblock admin_content %}

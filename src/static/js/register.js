@@ -125,3 +125,59 @@ const handleToggleInput= (e) => {
 
 
 showPasswordToggle.addEventListener('click',handleToggleInput);
+
+
+
+
+
+// for password validation
+const passwordField = document.querySelector('#passwordField');
+const feedBackArea = document.querySelector('.invalid_feedback');
+
+// when username is available this msg will be shown by using this queryselector
+const passwordsuccessOutput = document.querySelector('.passwordsuccessOutput');
+
+// get what user is typing by this eventlistener
+passwordField.addEventListener('keyup',(e)=>{
+
+    console.log('7777777',7777777);
+
+    const usernameVal = e.target.value;
+    // console.log('username',usernameVal);
+
+    // if available disp msg available
+    passwordsuccessOutput.style.display = 'block';
+    passwordsuccessOutput.textContent = `Checking ${usernameVal}`;
+
+
+    // when user deletes invalid username or press backspace then invalid goes then error also goes 
+    passwordField.classList.remove('is-invalid');
+    feedBackArea.style.display='none';
+
+    // fetch api call
+    if(usernameVal.length<8) {
+
+        fetch("/authentication/validate-password",{
+            body:JSON.stringify({'username':usernameVal}),
+            method:'POST',
+        }).then(res=>res.json()).then(data=>{
+            // console.log('data',data);
+
+            passwordsuccessOutput.style.display = 'none';
+
+            if(data.username_error) {
+                passwordField.classList.add('is-invalid');
+
+                feedBackArea.style.display='block';
+                
+                feedBackArea.innerHTML=`<p>${data.username_error}</p>`
+                submitBtn.setAttribute('disabled','disabled');
+                submitBtn.disabled = true;
+            }
+            else {
+                submitBtn.removeAttribute('disabled');
+            }
+        });
+    }
+
+});

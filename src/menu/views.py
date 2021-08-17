@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 import datetime
 from django.core.paginator import Paginator
-from accounts.models import Customer
+from accounts.models import Customer,Comment
 from django.core.mail import send_mail
 
 
@@ -17,6 +17,7 @@ from django.shortcuts import get_object_or_404
 
 from django.db.models import Count
 from io import BytesIO
+
 
 
 
@@ -61,9 +62,12 @@ from io import BytesIO
 def all_foods_index_page(request):
     current_year = datetime.datetime.now().year
     foods = Food.objects.all()
+    comments = Comment.objects.all()
+
     context = {
         'foods':foods,
-        'current_year':current_year
+        'current_year':current_year,
+        'comments':comments
     }
     return render(request,'index.html',context)
 
@@ -117,6 +121,15 @@ def food_filter_cold_drinks(request):
 def food_details(request, id):
     if request.user.is_authenticated:
         food = Food.objects.get(id=id)
+
+        # adding comment 
+        if request.method == "POST":
+            user = request.user
+            content = request.POST.get('content')
+            comment_user = Comment.objects.create(user=user,content=content)
+            comment_user.save()
+            return redirect('/')
+
         return render(request, 'menu/single.html', {'food':food})
 
     else:
@@ -247,3 +260,7 @@ def menu_order_course(request):
     'labels': labels,
     'data': data,
     })
+
+
+
+

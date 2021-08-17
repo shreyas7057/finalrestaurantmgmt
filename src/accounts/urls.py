@@ -39,6 +39,8 @@ urlpatterns = [
 
     path('profile/',views.user_profile,name='user_profile'),
 
+    # path('add_comment/',views.add_comment,name='add_comment'),
+
     # path('update_address/',views.update_address,name='update_address'),
 
 ]

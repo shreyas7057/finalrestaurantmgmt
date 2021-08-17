@@ -6,11 +6,9 @@
 
     <div class="col-xl-3 col-md-6">
         <div class="card bg-dark text-white mb-4">
-            <div class="card-body" >All Foods: {{ all_foods }}</div>
+            <div class="card-body" >All Menus: {{ all_foods }}</div>
             <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href=""></a>
-                <a class="small text-white stretched-link" href=""></a>
-                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                <div class="small text-white"><a href="{% url 'all_foods_admin' %}" style="color: white;">View</a></div>
             </div>
         </div>
     </div>
@@ -19,9 +17,7 @@
         <div class="card bg-dark text-white mb-4">
             <div class="card-body" >All Orders: {{ all_orders }}</div>
             <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href=""></a>
-                <a class="small text-white stretched-link" href=""></a>
-                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                <div class="small text-white"><a href="{% url 'all_orders_admin' %}" style="color: white;">View</a></div>
             </div>
         </div>
     </div>
@@ -30,9 +26,7 @@
         <div class="card bg-dark text-white mb-4">
             <div class="card-body" >All Customers: {{ all_customers }}</div>
             <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href=""></a>
-                <a class="small text-white stretched-link" href=""></a>
-                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                <div class="small text-white"><a href="{% url 'all_customers' %}" style="color: white;">View</a></div>
             </div>
         </div>
     </div>
